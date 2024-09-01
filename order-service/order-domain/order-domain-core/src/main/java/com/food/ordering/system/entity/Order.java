@@ -39,7 +39,7 @@ public class Order extends AggregateRoot<OrderId> {
         }
     }
 
-    private void validateOrder() {
+    public void validateOrder() {
         validateInitialOrder();
         validateTotalPrice();
         validateItemsPrice();
