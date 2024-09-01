@@ -12,17 +12,9 @@ public class OrderItem extends BaseEntity<OrderItemId> {
     private final Money price;
     private final Money subTotal;
 
-    public OrderItem(Product product, int quantity, Money price, Money subTotal) {
-        this.product = product;
-        this.quantity = quantity;
-        this.price = price;
-        this.subTotal = subTotal;
-    }
-
     void initializeOrderItem(OrderId orderId, OrderItemId orderItemId) {
         this.orderId = orderId;
         super.setId(orderItemId);
-
     }
 
     boolean isPriceValid() {
@@ -37,6 +29,10 @@ public class OrderItem extends BaseEntity<OrderItemId> {
         quantity = builder.quantity;
         price = builder.price;
         subTotal = builder.subTotal;
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
 
@@ -62,24 +58,36 @@ public class OrderItem extends BaseEntity<OrderItemId> {
 
     public static final class Builder {
         private OrderItemId orderItemId;
-        private final Product product;
-        private final int quantity;
-        private final Money price;
-        private final Money subTotal;
+        private Product product;
+        private int quantity;
+        private Money price;
+        private Money subTotal;
 
-        private Builder(Product product, int quantity, Money price, Money subTotal) {
-            this.product = product;
-            this.quantity = quantity;
-            this.price = price;
-            this.subTotal = subTotal;
+        private Builder() {
         }
 
-        public static Builder builder(Product product, int quantity, Money price, Money subTotal) {
-            return new Builder(product, quantity, price, subTotal);
-        }
-
-        public Builder id(OrderItemId val) {
+        public Builder orderItemId(OrderItemId val) {
             orderItemId = val;
+            return this;
+        }
+
+        public Builder product(Product val) {
+            product = val;
+            return this;
+        }
+
+        public Builder quantity(int val) {
+            quantity = val;
+            return this;
+        }
+
+        public Builder price(Money val) {
+            price = val;
+            return this;
+        }
+
+        public Builder subTotal(Money val) {
+            subTotal = val;
             return this;
         }
 
